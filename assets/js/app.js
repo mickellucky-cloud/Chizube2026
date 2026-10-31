@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = 0;
     const totalSlides = slides.length;
 
-    function goToSlide(index) {
+    function goToSlide(index, userInitiated = false) {
       if (totalSlides === 0) return;
       currentIndex = (index + totalSlides) % totalSlides;
 
@@ -239,17 +239,20 @@ document.addEventListener('DOMContentLoaded', () => {
         counterEl.textContent = `${currentIndex + 1} / ${totalSlides}`;
       }
 
-      // Scroll active thumbnail into view
-      if (thumbs[currentIndex]) {
-        thumbs[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      // Scroll active thumbnail inside its rail without scrolling the window
+      const thumbsRail = document.querySelector('.gallery-thumbs-rail');
+      const activeThumb = thumbs[currentIndex];
+      if (thumbsRail && activeThumb && userInitiated) {
+        const offsetLeft = activeThumb.offsetLeft - (thumbsRail.clientWidth / 2) + (activeThumb.clientWidth / 2);
+        thumbsRail.scrollTo({ left: offsetLeft, behavior: 'smooth' });
       }
     }
 
-    if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
-    if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+    if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1, true));
+    if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1, true));
 
     thumbs.forEach((thumb, i) => {
-      thumb.addEventListener('click', () => goToSlide(i));
+      thumb.addEventListener('click', () => goToSlide(i, true));
     });
 
     // Touch Swipe Support
@@ -347,7 +350,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const message = `Hello Chi Chi & Zubby! I am confirming my RSVP for Chizube 2026.\n\nName: ${name}\nStatus: ${status}\nParty Size: ${guests}${notes}\n\nCongratulations!`;
 
       const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-      window.open(whatsappUrl, '_blank');
+      const link = document.createElement('a');
+      link.href = whatsappUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
       showToast('Opening WhatsApp to send your RSVP...');
     });
   }
