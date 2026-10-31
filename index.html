@@ -68,12 +68,71 @@
         <span></span>
       </button>
 
+      <!-- Mobile Menu Overlay Backdrop -->
+      <div class="mobile-menu-backdrop" data-menu-backdrop aria-hidden="true"></div>
+
+      <!-- Navigation Drawer -->
       <nav class="site-nav" id="site-nav" aria-label="Main Navigation">
-        <a href="#story">Our Story</a>
-        <a href="#the-day">The Day</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#palette">Dress Code</a>
-        <a href="#rsvp" class="nav-rsvp-btn">RSVP</a>
+        <div class="drawer-header">
+          <div class="drawer-brand">
+            <img src="assets/images/emblem.png" alt="Chi Chi &amp; Zubby Monogram" class="drawer-emblem" width="44" height="44">
+            <div class="drawer-brand-text">
+              <span class="drawer-brand-title">Chizube 2026</span>
+              <span class="drawer-brand-sub">28 · 12 · 2026 · Lagos</span>
+            </div>
+          </div>
+          <button type="button" class="drawer-close-btn" data-menu-close aria-label="Close navigation menu">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div class="drawer-body">
+          <span class="drawer-section-label">Celebration Directory</span>
+          <div class="drawer-links-wrap">
+            <a href="#story" class="drawer-nav-item">
+              <span class="drawer-nav-left"><span class="drawer-nav-num">01</span><span class="drawer-nav-text">Our Story</span></span>
+              <span class="drawer-nav-chevron" aria-hidden="true">›</span>
+            </a>
+            <a href="#the-day" class="drawer-nav-item">
+              <span class="drawer-nav-left"><span class="drawer-nav-num">02</span><span class="drawer-nav-text">The Day &amp; Venues</span></span>
+              <span class="drawer-nav-chevron" aria-hidden="true">›</span>
+            </a>
+            <a href="#digital-pass" class="drawer-nav-item">
+              <span class="drawer-nav-left"><span class="drawer-nav-num">03</span><span class="drawer-nav-text">Digital Pass &amp; QR</span></span>
+              <span class="drawer-nav-chevron" aria-hidden="true">›</span>
+            </a>
+            <a href="#gallery" class="drawer-nav-item">
+              <span class="drawer-nav-left"><span class="drawer-nav-num">04</span><span class="drawer-nav-text">Photo Gallery</span></span>
+              <span class="drawer-nav-chevron" aria-hidden="true">›</span>
+            </a>
+            <a href="#palette" class="drawer-nav-item">
+              <span class="drawer-nav-left"><span class="drawer-nav-num">05</span><span class="drawer-nav-text">Dress Code</span></span>
+              <span class="drawer-nav-chevron" aria-hidden="true">›</span>
+            </a>
+            <a href="#rsvp" class="drawer-nav-item nav-rsvp-btn">
+              <span class="drawer-nav-text">Confirm RSVP</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="drawer-footer">
+          <div class="drawer-audio-pill" data-audio-toggle role="button" tabindex="0" aria-label="Toggle wedding music">
+            <div class="drawer-audio-icon-box">
+              <div class="audio-bars" aria-hidden="true">
+                <span></span><span></span><span></span>
+              </div>
+            </div>
+            <div class="drawer-audio-meta">
+              <span class="drawer-audio-title">Chizube Wedding Theme</span>
+              <span class="drawer-audio-status">Tap to Play / Pause</span>
+            </div>
+          </div>
+          <p class="drawer-verse">“Set me as a seal upon your heart... for love is as strong as death.”</p>
+          <span class="drawer-hashtag">#Chizube2026 · Chi Chi &amp; Zubby</span>
+        </div>
       </nav>
     </div>
   </header>
@@ -155,30 +214,32 @@
 
     <!-- 3. LIVE COUNTDOWN SECTION -->
     <section class="countdown-section section-pad" id="countdown" aria-label="Wedding Countdown">
-      <div class="container reveal-up">
-        <p class="countdown-kicker">Counting down the days to forever</p>
-        <h2 class="countdown-title">Monday, 28th December 2026</h2>
+      <div class="container">
+        <div class="section-header reveal-up" style="margin-bottom: 2.25rem;">
+          <p class="countdown-kicker">Counting down the days to forever</p>
+          <h2 class="countdown-title" style="margin-bottom: 0;">Monday, 28th December 2026</h2>
+        </div>
 
         <div class="countdown-grid">
-          <div class="countdown-item">
+          <div class="countdown-item reveal-up">
             <span class="countdown-number" data-days>000</span>
             <span class="countdown-label">Days</span>
           </div>
-          <div class="countdown-item">
+          <div class="countdown-item reveal-up">
             <span class="countdown-number" data-hours>00</span>
             <span class="countdown-label">Hours</span>
           </div>
-          <div class="countdown-item">
+          <div class="countdown-item reveal-up">
             <span class="countdown-number" data-minutes>00</span>
             <span class="countdown-label">Minutes</span>
           </div>
-          <div class="countdown-item">
+          <div class="countdown-item reveal-up">
             <span class="countdown-number" data-seconds>00</span>
             <span class="countdown-label">Seconds</span>
           </div>
         </div>
 
-        <button type="button" class="calendar-action-btn" data-calendar-btn>
+        <button type="button" class="calendar-action-btn reveal-up" data-calendar-btn>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
             <line x1="16" y1="2" x2="16" y2="6"></line>
@@ -196,28 +257,34 @@
         <div class="story-grid">
           
           <div class="story-media-stack reveal-up">
-            <img class="story-portrait-main" src="assets/images/portrait.jpg" alt="Chi Chi and Zubby portrait" loading="lazy">
-            <img class="story-portrait-inset" src="assets/images/hands.jpg" alt="Chi Chi and Zubby hands united" loading="lazy">
+            <div class="story-portrait-frame">
+              <img class="story-portrait-main" src="assets/images/portrait.jpg" alt="Chi Chi and Zubby portrait" loading="lazy">
+            </div>
+            <div class="story-inset-frame">
+              <img class="story-portrait-inset" src="assets/images/hands.jpg" alt="Chi Chi and Zubby hands united" loading="lazy">
+            </div>
           </div>
 
-          <div class="story-content reveal-up">
-            <p class="story-kicker">Our Journey of Faith &amp; Love</p>
-            <h2 class="story-title">Two lives intertwined by grace and purpose.</h2>
+          <div class="story-content">
+            <div class="story-header reveal-up">
+              <p class="story-kicker">Our Journey of Faith &amp; Love</p>
+              <h2 class="story-title">Two lives intertwined by grace and purpose.</h2>
+            </div>
             
-            <p class="story-paragraph">
+            <p class="story-paragraph reveal-up">
               What began as a divine alignment blossomed into a deep, unwavering partnership. Through shared prayers, laughter, and an unshakable commitment to one another, our journey has been an extraordinary testament to God's unfailing timing.
             </p>
 
-            <p class="story-paragraph">
+            <p class="story-paragraph reveal-up">
               As we prepare to step to the altar at Sacred Heart Catholic Church, we look forward to a lifetime of walking together hand in hand—building a home anchored in peace, unconditional devotion, and endless joy.
             </p>
 
-            <div class="story-quote-card">
+            <div class="story-quote-card reveal-up">
               “What therefore God hath joined together, let not man put asunder.”
               <br><small style="font-family: var(--font-sans); letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-gold-dark);">Matthew 19:6</small>
             </div>
 
-            <div class="story-signature">
+            <div class="story-signature reveal-up">
               Chi Chi &amp; Zubby
             </div>
           </div>
@@ -305,18 +372,18 @@
         </div>
 
         <!-- Schedule Timeline Strip -->
-        <div class="timeline-strip reveal-up">
-          <div class="timeline-card">
+        <div class="timeline-strip">
+          <div class="timeline-card reveal-up">
             <p class="timeline-time">9:00 AM</p>
             <h4 class="timeline-title">Matrimonial Mass</h4>
             <p class="timeline-desc">Sacred vows, blessing of rings, and Holy Eucharist at Sacred Heart Catholic Church.</p>
           </div>
-          <div class="timeline-card">
+          <div class="timeline-card reveal-up">
             <p class="timeline-time">11:30 AM</p>
             <h4 class="timeline-title">Photographs &amp; Blessings</h4>
             <p class="timeline-desc">Joyful group photographs with families, bridal train, friends, and distinguished guests.</p>
           </div>
-          <div class="timeline-card">
+          <div class="timeline-card reveal-up">
             <p class="timeline-time">1:00 PM</p>
             <h4 class="timeline-title">Grand Reception</h4>
             <p class="timeline-desc">Dinner feast, traditional honors, couple dance, and all-day celebration.</p>
@@ -413,9 +480,9 @@
           </p>
         </div>
 
-        <div class="palette-swatches-grid reveal-up">
+        <div class="palette-swatches-grid">
           
-          <div class="palette-swatch-card">
+          <div class="palette-swatch-card reveal-up">
             <div class="palette-heart-wrapper">
               <svg class="palette-heart-svg" viewBox="0 0 32 32">
                 <path fill="#0E1E38" d="M16 28.5C16 28.5 3 20.5 3 11.5C3 6.8 6.8 3 11.5 3C14.2 3 15.5 4.5 16 5.5C16.5 4.5 17.8 3 20.5 3C25.2 3 29 6.8 29 11.5C29 20.5 16 28.5 16 28.5Z"/>
@@ -426,7 +493,7 @@
             <p class="palette-desc">Regal dignity and enduring depth</p>
           </div>
 
-          <div class="palette-swatch-card">
+          <div class="palette-swatch-card reveal-up">
             <div class="palette-heart-wrapper">
               <svg class="palette-heart-svg" viewBox="0 0 32 32">
                 <path fill="#D4AF37" d="M16 28.5C16 28.5 3 20.5 3 11.5C3 6.8 6.8 3 11.5 3C14.2 3 15.5 4.5 16 5.5C16.5 4.5 17.8 3 20.5 3C25.2 3 29 6.8 29 11.5C29 20.5 16 28.5 16 28.5Z"/>
@@ -437,7 +504,7 @@
             <p class="palette-desc">Radiance, grace, and royal majesty</p>
           </div>
 
-          <div class="palette-swatch-card">
+          <div class="palette-swatch-card reveal-up">
             <div class="palette-heart-wrapper">
               <svg class="palette-heart-wrapper-inner">
                 <svg class="palette-heart-svg" viewBox="0 0 32 32">
@@ -450,7 +517,7 @@
             <p class="palette-desc">Purity, elegance, and warmth</p>
           </div>
 
-          <div class="palette-swatch-card">
+          <div class="palette-swatch-card reveal-up">
             <div class="palette-heart-wrapper">
               <svg class="palette-heart-svg" viewBox="0 0 32 32">
                 <path fill="#6B1731" d="M16 28.5C16 28.5 3 20.5 3 11.5C3 6.8 6.8 3 11.5 3C14.2 3 15.5 4.5 16 5.5C16.5 4.5 17.8 3 20.5 3C25.2 3 29 6.8 29 11.5C29 20.5 16 28.5 16 28.5Z"/>
@@ -466,79 +533,298 @@
       </div>
     </section>
 
-    <!-- 9. RSVP SECTION -->
+    <!-- 8.5 DIGITAL PASS & QR CODE SECTION -->
+    <section class="qr-pass-section section-pad" id="digital-pass" aria-label="Digital Invitation and RSVP QR Pass">
+      <div class="container">
+        
+        <div class="section-header reveal-up text-center">
+          <p class="section-kicker">Instant Digital Clearance</p>
+          <h2 class="section-title">Scan Digital Pass &amp; Fast-Track RSVP</h2>
+          <p class="section-subtitle">
+            Point your smartphone camera at the QR code below for instant mobile access to your digital invitation, reception details, or direct attendance confirmation.
+          </p>
+        </div>
+
+        <div class="qr-pass-wrapper reveal-up">
+          <div class="qr-pass-card">
+            
+            <!-- Metallic Decorative Frame Corners -->
+            <div class="qr-corner-accent top-left" aria-hidden="true"></div>
+            <div class="qr-corner-accent top-right" aria-hidden="true"></div>
+            <div class="qr-corner-accent bottom-left" aria-hidden="true"></div>
+            <div class="qr-corner-accent bottom-right" aria-hidden="true"></div>
+
+            <div class="qr-card-header">
+              <div class="qr-header-brand">
+                <img src="assets/images/emblem.png" alt="Chi Chi &amp; Zubby Crest" class="qr-emblem-badge" width="46" height="46">
+                <div class="qr-header-text">
+                  <span class="qr-badge-title">Chizube 2026 · Official Pass</span>
+                  <span class="qr-badge-sub">Sacred Heart Catholic Church · 28 Dec 2026</span>
+                </div>
+              </div>
+              <span class="qr-verified-tag">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Digital Verified
+              </span>
+            </div>
+
+            <!-- Destination Switcher -->
+            <div class="qr-switcher-row">
+              <span class="qr-switcher-label">Select QR Destination:</span>
+              <div class="qr-switcher-buttons" role="tablist">
+                <button type="button" class="qr-switch-btn active" data-qr-mode="rsvp" role="tab" aria-selected="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                  <span>RSVP Form Directly</span>
+                </button>
+                <button type="button" class="qr-switch-btn" data-qr-mode="invitation" role="tab" aria-selected="false">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                  <span>Full Digital Invitation</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- QR Code Canvas & Center Monogram -->
+            <div class="qr-visual-box">
+              <div class="qr-render-area" id="qr-target-container" aria-label="Wedding QR Code">
+                <!-- Injected via JavaScript -->
+              </div>
+              <div class="qr-center-crest" aria-hidden="true">
+                <span>CZ</span>
+              </div>
+            </div>
+
+            <div class="qr-destination-meta">
+              <span class="qr-scan-hint">Scans to:</span>
+              <code class="qr-url-readout" id="qr-url-text">https://...#rsvp</code>
+            </div>
+
+            <!-- Action Controls -->
+            <div class="qr-button-cluster">
+              <button type="button" class="btn-qr-action btn-qr-download" id="btn-download-qr-pass">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <span>Download Pass (PNG)</span>
+              </button>
+
+              <button type="button" class="btn-qr-action btn-qr-copy" id="btn-copy-qr-url">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                </svg>
+                <span>Copy Link</span>
+              </button>
+
+              <a href="#rsvp" class="btn-qr-action btn-qr-jump">
+                <span>Fill RSVP Form Below &darr;</span>
+              </a>
+            </div>
+
+            <!-- Security Advisory for Ojo Cantonment -->
+            <div class="qr-cantonment-banner">
+              <div class="qr-cantonment-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              </div>
+              <div class="qr-cantonment-text">
+                <strong>Ojo Military Cantonment Gate Advisory:</strong>
+                <span>Presenting your digital invitation or downloaded QR pass at the security gate guarantees swift clearance for you and your vehicle.</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 9. RSVP SECTION (UPGRADED) -->
     <section class="rsvp-section section-pad" id="rsvp" aria-label="RSVP and Attendance Confirmation">
       <div class="container">
         
         <div class="rsvp-layout-grid">
           
-          <div class="rsvp-text-col reveal-up">
-            <p class="rsvp-kicker">Kindly Respond</p>
-            <h2 class="rsvp-title">Will you celebrate with us?</h2>
-            <p class="rsvp-desc">
-              Your presence will make our day more special. Please confirm your attendance so we may reserve your seat in our banquet hall.
-            </p>
+          <div class="rsvp-text-col">
+            <div class="rsvp-header-block reveal-up">
+              <p class="rsvp-kicker">Kindly Respond</p>
+              <h2 class="rsvp-title">Will you celebrate with us?</h2>
+              <p class="rsvp-desc">
+                Your presence will make our day more special. Please confirm your attendance so we may reserve your seats in our banquet hall and welcome you with open arms.
+              </p>
+            </div>
 
-            <div class="rsvp-contact-box">
-              <p class="rsvp-contact-label">Direct RSVP Contact</p>
-              <a href="tel:+2348130255015" class="rsvp-contact-phone">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                </svg>
-                08130255015
-              </a>
-              <p class="rsvp-card-code">RSVP: OIP: TW 0C - 08130255015</p>
+            <div class="rsvp-contact-box reveal-up">
+              <div class="rsvp-contact-header">
+                <span class="rsvp-contact-icon-wrap" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                  </svg>
+                </span>
+                <div class="rsvp-contact-meta">
+                  <p class="rsvp-contact-label">Direct RSVP Line</p>
+                  <a href="tel:+2348130255015" class="rsvp-contact-phone">0813 025 5015</a>
+                </div>
+              </div>
+              <div class="rsvp-code-row">
+                <span class="rsvp-card-code">RSVP CODE: OIP · TW 0C · 08130255015</span>
+              </div>
+            </div>
+
+            <div class="rsvp-reminder-badge reveal-up">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <span>Please RSVP on or before <strong>Monday, 30th November 2026</strong> to ensure proper banquet reservations.</span>
             </div>
           </div>
 
-          <!-- RSVP Form Card -->
+          <!-- RSVP Form Card with Upgraded Design -->
           <div class="rsvp-form-card reveal-up">
-            <form id="rsvp-form">
+            
+            <!-- Live Confirmation Success State -->
+            <div class="rsvp-success-card" id="rsvp-success-card" style="display: none;">
+              <div class="success-badge-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+              </div>
+              <h3 class="success-title">RSVP Confirmed With Joy!</h3>
+              <p class="success-subtitle">Thank you, <strong id="success-guest-name">Esteemed Guest</strong>. Your response has been warmly received.</p>
               
-              <div class="form-group">
-                <label for="guest-name" class="form-label">Full Name *</label>
-                <input type="text" id="guest-name" class="form-control" placeholder="e.g. Chief &amp; Dr. (Mrs) Emeka Okafor" required>
+              <div class="success-details-summary">
+                <div class="success-detail-row">
+                  <span class="detail-label">Status</span>
+                  <span class="detail-value" id="success-guest-status">Joyfully Attending</span>
+                </div>
+                <div class="success-detail-row">
+                  <span class="detail-label">Reserved Seats</span>
+                  <span class="detail-value" id="success-guest-count">1 Person</span>
+                </div>
+                <div class="success-detail-row">
+                  <span class="detail-label">Ceremony Date</span>
+                  <span class="detail-value">Mon, 28th Dec 2026 · 9:00 AM</span>
+                </div>
+              </div>
+
+              <div class="success-actions">
+                <a href="#digital-pass" class="btn-success-pass">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  <span>View Your QR Gate Pass</span>
+                </a>
+                <button type="button" class="btn-success-reset" id="btn-edit-rsvp">
+                  <span>Edit Response</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- The Form -->
+            <form id="rsvp-form">
+              <div class="form-card-header">
+                <span class="form-card-kicker">Official Response</span>
+                <h3 class="form-card-title">Matrimonial Attendance Card</h3>
+                <span class="form-card-subtitle">Fill below to record your response directly</span>
               </div>
 
               <div class="form-group">
-                <label class="form-label">Will you be attending? *</label>
-                <div class="radio-group-cards">
-                  <label class="radio-card">
-                    <input type="radio" name="attendance" value="Attending" checked>
-                    <span>Joyfully Accepts</span>
-                  </label>
-                  <label class="radio-card">
-                    <input type="radio" name="attendance" value="Declining">
-                    <span>Regretfully Declines</span>
-                  </label>
+                <label for="guest-name" class="form-label">
+                  <span>Full Name &amp; Title</span>
+                  <span class="form-required">*</span>
+                </label>
+                <div class="input-with-icon">
+                  <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  <input type="text" id="guest-name" class="form-control" placeholder="e.g. Chief &amp; Dr. (Mrs) Emeka Okafor" required>
                 </div>
               </div>
 
               <div class="form-group">
-                <label for="guest-count" class="form-label">Number of Guests</label>
-                <select id="guest-count" class="form-control">
-                  <option value="1">1 Person</option>
-                  <option value="2">2 Persons (Couple)</option>
-                  <option value="3">3 Persons</option>
-                  <option value="4+">Family (4+ Persons)</option>
-                </select>
+                <label class="form-label">
+                  <span>Will you be celebrating with us?</span>
+                  <span class="form-required">*</span>
+                </label>
+                <div class="luxury-attendance-cards">
+                  <label class="attending-card">
+                    <input type="radio" name="attendance" value="Attending" checked>
+                    <div class="attending-card-inner">
+                      <div class="attending-icon-check">✓</div>
+                      <div class="attending-card-text">
+                        <strong class="attending-title">Joyfully Accepts</strong>
+                        <span class="attending-desc">Delighted to attend and celebrate</span>
+                      </div>
+                    </div>
+                  </label>
+
+                  <label class="attending-card decline-card">
+                    <input type="radio" name="attendance" value="Declining">
+                    <div class="attending-card-inner">
+                      <div class="attending-icon-check">✕</div>
+                      <div class="attending-card-text">
+                        <strong class="attending-title">Regretfully Declines</strong>
+                        <span class="attending-desc">Sending warmest love &amp; prayers</span>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-row-grid">
+                <div class="form-group">
+                  <label for="guest-count" class="form-label">
+                    <span>Number of Guests</span>
+                  </label>
+                  <div class="input-with-icon">
+                    <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    <select id="guest-count" class="form-control">
+                      <option value="1">1 Person (Self)</option>
+                      <option value="2">2 Persons (Couple)</option>
+                      <option value="3">3 Persons</option>
+                      <option value="4+">Family (4+ Persons)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="guest-phone" class="form-label">
+                    <span>Mobile Phone</span>
+                  </label>
+                  <div class="input-with-icon">
+                    <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <input type="tel" id="guest-phone" class="form-control" placeholder="e.g. 08012345678">
+                  </div>
+                </div>
               </div>
 
               <div class="form-group">
-                <label for="guest-notes" class="form-label">Well Wishes / Special Note</label>
-                <textarea id="guest-notes" class="form-control" rows="3" placeholder="Leave a prayer or message for Chi Chi &amp; Zubby..."></textarea>
+                <label for="guest-notes" class="form-label">
+                  <span>Well Wishes / Prayer for Chi Chi &amp; Zubby</span>
+                </label>
+                <textarea id="guest-notes" class="form-control" rows="3" placeholder="Leave a prayer or message of celebration..."></textarea>
               </div>
 
-              <button type="submit" class="btn-rsvp-submit">
-                <span>Confirm RSVP on Site</span>
-              </button>
+              <!-- Button Pair -->
+              <div class="form-buttons-stack">
+                <button type="submit" class="btn-rsvp-primary" id="btn-submit-rsvp">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  <span>Confirm RSVP on Site</span>
+                </button>
 
-              <button type="button" id="btn-whatsapp-rsvp" class="btn-rsvp-whatsapp">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M17.472 14.382c-.301-.15-1.782-.879-2.058-.98-.276-.1-.476-.15-.676.15-.2.301-.776.98-.952 1.18-.175.2-.351.226-.652.075-.301-.15-1.272-.469-2.424-1.496-.897-.799-1.503-1.787-1.68-2.088-.175-.301-.019-.464.132-.614.135-.135.301-.351.451-.527.151-.175.2-.301.301-.501.1-.2.05-.376-.025-.526-.075-.15-.676-1.63-.926-2.233-.244-.588-.492-.508-.676-.517-.175-.01-.376-.01-.577-.01-.2 0-.526.075-.802.376-.276.301-1.053 1.03-1.053 2.511s1.078 2.913 1.229 3.114c.15.2 2.122 3.24 5.141 4.544.718.31 1.278.496 1.716.635.722.23 1.378.197 1.9.12.58-.087 1.782-.728 2.033-1.431.25-.703.25-1.306.175-1.431-.075-.125-.276-.2-.577-.35zM12.04 2C6.495 2 2 6.495 2 12.04c0 1.966.564 3.801 1.543 5.36L2 22l4.74-1.505c1.51.899 3.27 1.405 5.3 1.405 5.545 0 10.04-4.495 10.04-10.04S17.585 2 12.04 2z"/>
-                </svg>
-                <span>Send RSVP via WhatsApp</span>
-              </button>
+                <div class="form-divider-or">
+                  <span>or send instant verification</span>
+                </div>
+
+                <button type="button" id="btn-whatsapp-rsvp" class="btn-rsvp-secondary-whatsapp">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.301-.15-1.782-.879-2.058-.98-.276-.1-.476-.15-.676.15-.2.301-.776.98-.952 1.18-.175.2-.351.226-.652.075-.301-.15-1.272-.469-2.424-1.496-.897-.799-1.503-1.787-1.68-2.088-.175-.301-.019-.464.132-.614.135-.135.301-.351.451-.527.151-.175.2-.301.301-.501.1-.2.05-.376-.025-.526-.075-.15-.676-1.63-.926-2.233-.244-.588-.492-.508-.676-.517-.175-.01-.376-.01-.577-.01-.2 0-.526.075-.802.376-.276.301-1.053 1.03-1.053 2.511s1.078 2.913 1.229 3.114c.15.2 2.122 3.24 5.141 4.544.718.31 1.278.496 1.716.635.722.23 1.378.197 1.9.12.58-.087 1.782-.728 2.033-1.431.25-.703.25-1.306.175-1.431-.075-.125-.276-.2-.577-.35zM12.04 2C6.495 2 2 6.495 2 12.04c0 1.966.564 3.801 1.543 5.36L2 22l4.74-1.505c1.51.899 3.27 1.405 5.3 1.405 5.545 0 10.04-4.495 10.04-10.04S17.585 2 12.04 2z"/>
+                  </svg>
+                  <span>Send RSVP via WhatsApp</span>
+                </button>
+              </div>
 
             </form>
           </div>
@@ -591,6 +877,6 @@
 
   <!-- Scripts -->
   <script src="assets/js/wedding-config.js"></script>
-  <script src="assets/js/app.js"></script>
+  <script type="module" src="assets/js/app.js"></script>
 </body>
 </html>

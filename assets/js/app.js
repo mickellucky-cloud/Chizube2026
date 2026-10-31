@@ -1,6 +1,8 @@
+import QRCode from 'qrcode';
+
 /**
  * CHIZUBE 2026 - Wedding Invitation Engine
- * Interactive Countdown, Seamless Audio Autoplay, Gallery Lightbox, RSVP
+ * Interactive Countdown, Seamless Audio Autoplay, Gallery Lightbox, RSVP, QR Pass
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -34,49 +36,77 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', handleScroll, { passive: true });
   handleScroll();
 
-  // 2. Mobile Menu
+  // 2. Mobile Menu & Drawer Controller
+  const menuBackdrop = document.querySelector('[data-menu-backdrop]');
+  const drawerClose = document.querySelector('[data-menu-close]');
+
+  const closeMenu = () => {
+    if (!siteNav) return;
+    siteNav.classList.remove('open');
+    if (menuToggle) {
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.classList.remove('is-active');
+    }
+    document.body.classList.remove('menu-locked');
+  };
+
+  const openMenu = () => {
+    if (!siteNav) return;
+    siteNav.classList.add('open');
+    if (menuToggle) {
+      menuToggle.setAttribute('aria-expanded', 'true');
+      menuToggle.classList.add('is-active');
+    }
+    document.body.classList.add('menu-locked');
+  };
+
   if (menuToggle && siteNav) {
     menuToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       const isOpen = siteNav.classList.contains('open');
-      siteNav.classList.toggle('open', !isOpen);
-      menuToggle.setAttribute('aria-expanded', String(!isOpen));
-      menuToggle.classList.toggle('is-active', !isOpen);
-      document.body.classList.toggle('menu-locked', !isOpen);
+      if (isOpen) closeMenu();
+      else openMenu();
     });
 
-    siteNav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        siteNav.classList.remove('open');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.classList.remove('is-active');
-        document.body.classList.remove('menu-locked');
+    if (drawerClose) {
+      drawerClose.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeMenu();
       });
+    }
+
+    if (menuBackdrop) {
+      menuBackdrop.addEventListener('click', closeMenu);
+    }
+
+    siteNav.querySelectorAll('.drawer-nav-item').forEach(link => {
+      link.addEventListener('click', closeMenu);
     });
 
-    // Close when clicking outside
-    document.addEventListener('click', (e) => {
-      if (siteNav.classList.contains('open') && !siteNav.contains(e.target) && !menuToggle.contains(e.target)) {
-        siteNav.classList.remove('open');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.classList.remove('is-active');
-        document.body.classList.remove('menu-locked');
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && siteNav.classList.contains('open')) {
+        closeMenu();
       }
     });
   }
 
-  // 3. Audio Autoplay & Controller with Gesture Fallback
+  // 3. Audio Autoplay & Sync Controller (Header & Drawer)
+  const audioButtons = document.querySelectorAll('[data-audio-toggle]');
   if (audioElement) {
     audioElement.volume = 0.85;
 
     const updateAudioState = (playing) => {
-      if (audioToggle) {
-        audioToggle.classList.toggle('playing', playing);
-        const textSpan = audioToggle.querySelector('.audio-text');
+      audioButtons.forEach(btn => {
+        btn.classList.toggle('playing', playing);
+        const textSpan = btn.querySelector('.audio-text');
         if (textSpan) {
           textSpan.textContent = playing ? 'Pause Music' : 'Play Music';
         }
-      }
+        const drawerStatus = btn.querySelector('.drawer-audio-status');
+        if (drawerStatus) {
+          drawerStatus.textContent = playing ? 'Now Playing · Tap to Pause' : 'Paused · Tap to Play';
+        }
+      });
     };
 
     const playAudio = () => {
@@ -85,8 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         promise.then(() => {
           updateAudioState(true);
           cleanupGestureListeners();
-        }).catch(err => {
-          // Autoplay was prevented by browser policy
+        }).catch(() => {
           updateAudioState(false);
         });
       }
@@ -117,9 +146,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     attachGestureListeners();
 
-    // Explicit user toggle button
-    if (audioToggle) {
-      audioToggle.addEventListener('click', (e) => {
+    // Connect all audio toggle buttons
+    audioButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
         e.stopPropagation();
         if (audioElement.paused) {
           audioElement.play().then(() => {
@@ -134,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
           showToast('Music paused');
         }
       });
-    }
+    });
 
     audioElement.addEventListener('ended', () => {
       audioElement.currentTime = 0;
@@ -306,8 +335,176 @@ document.addEventListener('DOMContentLoaded', () => {
     goToSlide(0);
   }
 
-  // 7. RSVP Engine (WhatsApp Direct & Form Feedback)
+  // 7. Digital Pass QR Code Engine
+  const qrContainer = document.querySelector('#qr-target-container');
+  const qrUrlReadout = document.querySelector('#qr-url-text');
+  const qrModeButtons = document.querySelectorAll('[data-qr-mode]');
+  const btnDownloadQr = document.querySelector('#btn-download-qr-pass');
+  const btnCopyQr = document.querySelector('#btn-copy-qr-url');
+
+  let currentQrMode = 'rsvp';
+  const getBaseUrl = () => {
+    return window.location.origin + window.location.pathname.replace(/\/$/, '');
+  };
+
+  const getTargetQrUrl = (mode) => {
+    const base = getBaseUrl();
+    return mode === 'rsvp' ? `${base}#rsvp` : base;
+  };
+
+  async function renderQrCode(mode) {
+    if (!qrContainer) return;
+    const url = getTargetQrUrl(mode);
+    if (qrUrlReadout) qrUrlReadout.textContent = url;
+
+    try {
+      const svgString = await QRCode.toString(url, {
+        type: 'svg',
+        margin: 1,
+        color: {
+          dark: '#0E1E38',
+          light: '#FFFFFF'
+        },
+        errorCorrectionLevel: 'H'
+      });
+      qrContainer.innerHTML = svgString;
+    } catch (err) {
+      console.error('Error rendering QR code:', err);
+    }
+  }
+
+  qrModeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      qrModeButtons.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      currentQrMode = btn.getAttribute('data-qr-mode') || 'rsvp';
+      renderQrCode(currentQrMode);
+    });
+  });
+
+  // Copy QR Link
+  if (btnCopyQr) {
+    btnCopyQr.addEventListener('click', async () => {
+      const url = getTargetQrUrl(currentQrMode);
+      try {
+        await navigator.clipboard.writeText(url);
+        showToast('✓ Link copied to clipboard');
+      } catch (err) {
+        showToast('Link: ' + url);
+      }
+    });
+  }
+
+  // Download High-Resolution Gate Clearance Pass
+  if (btnDownloadQr) {
+    btnDownloadQr.addEventListener('click', async () => {
+      const url = getTargetQrUrl(currentQrMode);
+      try {
+        showToast('Generating official clearance pass...');
+        const qrDataUrl = await QRCode.toDataURL(url, {
+          width: 320,
+          margin: 1,
+          color: { dark: '#0E1E38', light: '#FFFFFF' },
+          errorCorrectionLevel: 'H'
+        });
+
+        const canvas = document.createElement('canvas');
+        canvas.width = 640;
+        canvas.height = 840;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        // Warm Ivory Card Background
+        ctx.fillStyle = '#FAF7F2';
+        ctx.fillRect(0, 0, 640, 840);
+
+        // Gold Foil Border
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = '#D4AF37';
+        ctx.strokeRect(20, 20, 600, 800);
+
+        // Inner Navy Border
+        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = '#0E1E38';
+        ctx.strokeRect(28, 28, 584, 784);
+
+        // Header Title
+        ctx.fillStyle = '#0E1E38';
+        ctx.textAlign = 'center';
+        ctx.font = 'bold 22px Georgia, serif';
+        ctx.fillText('SACRAMENT OF HOLY MATRIMONY', 320, 80);
+
+        ctx.font = 'italic 16px sans-serif';
+        ctx.fillStyle = '#D4AF37';
+        ctx.fillText('Official Digital Gate Clearance & RSVP Pass', 320, 110);
+
+        ctx.font = 'bold 36px Georgia, serif';
+        ctx.fillStyle = '#6B1731';
+        ctx.fillText('Chi Chi & Zubby', 320, 160);
+
+        ctx.font = '15px sans-serif';
+        ctx.fillStyle = '#1C2430';
+        ctx.fillText('Monday, 28th December 2026 · 9:00 AM Prompt', 320, 195);
+        ctx.fillText('Sacred Heart Catholic Church · Ojo Cantonment, Lagos', 320, 220);
+
+        // Render QR Code onto Canvas
+        const img = new Image();
+        img.onload = () => {
+          ctx.drawImage(img, 170, 260, 300, 300);
+
+          // Center Monogram Seal
+          ctx.beginPath();
+          ctx.arc(320, 410, 28, 0, Math.PI * 2);
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fill();
+          ctx.lineWidth = 2.5;
+          ctx.strokeStyle = '#D4AF37';
+          ctx.stroke();
+
+          ctx.fillStyle = '#0E1E38';
+          ctx.font = 'bold 16px Georgia, serif';
+          ctx.fillText('C & Z', 320, 416);
+
+          // Footer Notice
+          ctx.font = 'bold 14px sans-serif';
+          ctx.fillStyle = '#0E1E38';
+          ctx.fillText('SCAN WITH CAMERA FOR INSTANT GATE CLEARANCE & RSVP', 320, 600);
+
+          ctx.font = 'italic 14px Georgia, serif';
+          ctx.fillStyle = '#6B1731';
+          ctx.fillText('“Love is as strong as death” — Song of Solomon 8:6', 320, 640);
+
+          ctx.font = 'bold 15px sans-serif';
+          ctx.fillStyle = '#D4AF37';
+          ctx.fillText('#Chizube2026', 320, 675);
+
+          // Trigger download
+          const link = document.createElement('a');
+          link.download = 'Chizube2026-DigitalGatePass.png';
+          link.href = canvas.toDataURL('image/png');
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          showToast('✓ Digital Pass downloaded to device');
+        };
+        img.src = qrDataUrl;
+      } catch (err) {
+        showToast('Download complete. Check downloads.');
+      }
+    });
+  }
+
+  // Initialize QR
+  renderQrCode('rsvp');
+
+  // 8. RSVP Engine & Live Confirmation Feedback
   const rsvpForm = document.querySelector('#rsvp-form');
+  const rsvpSuccessCard = document.querySelector('#rsvp-success-card');
+  const btnEditRsvp = document.querySelector('#btn-edit-rsvp');
   const whatsappSubmitBtn = document.querySelector('#btn-whatsapp-rsvp');
 
   function getRsvpData() {
@@ -315,8 +512,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const name = rsvpForm.querySelector('#guest-name')?.value.trim();
     const attendance = rsvpForm.querySelector('input[name="attendance"]:checked')?.value || 'Attending';
     const guestCount = rsvpForm.querySelector('#guest-count')?.value || '1';
+    const phone = rsvpForm.querySelector('#guest-phone')?.value.trim();
     const notes = rsvpForm.querySelector('#guest-notes')?.value.trim();
-    return { name, attendance, guestCount, notes };
+    return { name, attendance, guestCount, phone, notes };
+  }
+
+  function displaySuccessState(data) {
+    if (!rsvpForm || !rsvpSuccessCard) return;
+    rsvpForm.style.display = 'none';
+    rsvpSuccessCard.style.display = 'block';
+
+    const guestNameEl = document.querySelector('#success-guest-name');
+    const guestStatusEl = document.querySelector('#success-guest-status');
+    const guestCountEl = document.querySelector('#success-guest-count');
+
+    if (guestNameEl) guestNameEl.textContent = data.name || 'Esteemed Guest';
+    if (guestStatusEl) {
+      guestStatusEl.textContent = data.attendance === 'Declining' ? 'Regretfully Declining' : 'Joyfully Attending';
+      guestStatusEl.style.color = data.attendance === 'Declining' ? 'var(--color-burgundy)' : '#A68010';
+    }
+    if (guestCountEl) guestCountEl.textContent = `${data.guestCount} ${data.guestCount === '1' ? 'Person' : 'Persons'}`;
   }
 
   if (rsvpForm) {
@@ -324,7 +539,7 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const data = getRsvpData();
       if (!data.name) {
-        showToast('Please enter your full name');
+        showToast('Please provide your full name');
         return;
       }
 
@@ -332,10 +547,30 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('chizube_rsvp', JSON.stringify({ ...data, date: new Date().toISOString() }));
       } catch (err) {}
 
-      showToast(`Thank you, ${data.name}! Your RSVP has been noted.`);
-      rsvpForm.reset();
+      displaySuccessState(data);
+      showToast(`✨ Thank you, ${data.name}! Your RSVP has been confirmed.`);
     });
   }
+
+  if (btnEditRsvp) {
+    btnEditRsvp.addEventListener('click', () => {
+      if (rsvpForm && rsvpSuccessCard) {
+        rsvpSuccessCard.style.display = 'none';
+        rsvpForm.style.display = 'block';
+      }
+    });
+  }
+
+  // Restore saved RSVP if previously submitted
+  try {
+    const savedRsvp = localStorage.getItem('chizube_rsvp');
+    if (savedRsvp) {
+      const parsed = JSON.parse(savedRsvp);
+      if (parsed && parsed.name) {
+        displaySuccessState(parsed);
+      }
+    }
+  } catch (err) {}
 
   if (whatsappSubmitBtn) {
     whatsappSubmitBtn.addEventListener('click', (e) => {
@@ -344,12 +579,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const name = data?.name || 'A Guest';
       const status = data?.attendance === 'Declining' ? 'Regretfully Declining' : 'Joyfully Attending';
       const guests = data?.guestCount || '1';
-      const notes = data?.notes ? ` Message: "${data.notes}"` : '';
+      const phone = data?.phone ? `\n📞 Phone: ${data.phone}` : '';
+      const notes = data?.notes ? `\n💌 Prayer/Note: "${data.notes}"` : '';
 
-      const phone = cfg.rsvp?.whatsappNumber || '2348130255015';
-      const message = `Hello Chi Chi & Zubby! I am confirming my RSVP for Chizube 2026.\n\nName: ${name}\nStatus: ${status}\nParty Size: ${guests}${notes}\n\nCongratulations!`;
+      const targetPhone = cfg.rsvp?.whatsappNumber || '2348130255015';
+      const message = `Hello Chi Chi & Zubby! I am confirming my RSVP for Chizube 2026.\n\n👤 Name: ${name}\n✨ Status: ${status}\n👥 Reserved Seats: ${guests} Person(s)${phone}${notes}\n\nCongratulations and God bless your union!`;
 
-      const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+      const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`;
       const link = document.createElement('a');
       link.href = whatsappUrl;
       link.target = '_blank';
@@ -388,22 +624,66 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 9. Reveal on Scroll (Intersection Observer)
-  const revealElements = document.querySelectorAll('.reveal-up');
+  // 9. Reveal on Scroll (Intersection Observer with Sibling Staggering)
+  const revealTargetsSelector = [
+    '.section-header',
+    '.invitation-card',
+    '.invitation-detail-item',
+    '.countdown-item',
+    '.calendar-action-btn',
+    '.story-media-stack',
+    '.story-header',
+    '.story-paragraph',
+    '.story-quote-card',
+    '.story-signature',
+    '.sacred-union-content',
+    '.venue-card',
+    '.timeline-card',
+    '.gallery-slider-wrap',
+    '.gallery-thumbs-rail',
+    '.palette-swatch-card',
+    '.qr-pass-card',
+    '.rsvp-header-block',
+    '.rsvp-contact-box',
+    '.rsvp-reminder-badge',
+    '.rsvp-form-card',
+    '.closing-section .container'
+  ].join(', ');
+
+  document.querySelectorAll(revealTargetsSelector).forEach((el) => {
+    el.classList.add('reveal-up', 'reveal-on-scroll');
+  });
+
+  // Apply staggered transition delays to sibling cards inside grids and stacks
+  const staggerContainers = document.querySelectorAll(
+    '.invitation-details-grid, .countdown-grid, .story-text-stack, .venues-grid, .timeline-strip, .palette-swatches-grid, .rsvp-text-col'
+  );
+  staggerContainers.forEach((container) => {
+    const items = container.querySelectorAll(':scope > .reveal-up');
+    items.forEach((item, index) => {
+      item.style.setProperty('--reveal-delay', `${(index % 4) * 95}ms`);
+    });
+  });
+
+  const revealElements = document.querySelectorAll('.reveal-up, .reveal-on-scroll');
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if ('IntersectionObserver' in window && !prefersReduced) {
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('in-view');
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
 
-    revealElements.forEach(el => observer.observe(el));
+    revealElements.forEach((el) => observer.observe(el));
   } else {
-    revealElements.forEach(el => el.classList.add('in-view'));
+    revealElements.forEach((el) => el.classList.add('in-view'));
   }
 });
+
