@@ -299,6 +299,11 @@ button {
   letter-spacing: 0.04em;
   transition: all var(--duration-fast);
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  white-space: nowrap;
+}
+
+.audio-toggle-btn .audio-text {
+  white-space: nowrap;
 }
 
 .site-header.scrolled .audio-toggle-btn {
@@ -377,6 +382,29 @@ button {
   }
   .site-header.scrolled {
     padding: 0.75rem 1.25rem;
+  }
+  .nav-cluster {
+    gap: 0.75rem;
+  }
+  /* Mobile: Clean icon-only audio toggle */
+  .audio-toggle-btn {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    padding: 0;
+    border-radius: 50%;
+    justify-content: center;
+    gap: 0;
+  }
+  .audio-toggle-btn .audio-text {
+    display: none !important;
+  }
+  .audio-bars {
+    height: 16px;
+    gap: 3px;
+  }
+  .audio-bars span {
+    width: 2.8px;
   }
   .menu-toggle {
     display: flex;
