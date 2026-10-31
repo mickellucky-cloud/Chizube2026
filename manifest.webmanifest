@@ -1,0 +1,16 @@
+{
+  "name": "Chizube 2026 | Chi Chi & Zubby Wedding",
+  "short_name": "Chizube 2026",
+  "description": "Join Chi Chi & Zubby as they celebrate the Sacrament of Holy Matrimony on 28 December 2026 in Lagos, Nigeria.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#FAF7F2",
+  "theme_color": "#0E1E38",
+  "icons": [
+    {
+      "src": "assets/icons/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
