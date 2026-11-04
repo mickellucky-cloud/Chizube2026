@@ -34,6 +34,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Italiana&display=swap" rel="stylesheet">
 
+  <!-- Preload Critical Above-the-Fold Assets -->
+  <link rel="preload" as="image" href="/assets/aistudio/chizube1_1328dfb0.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/emblem.png" fetchpriority="high">
+
   <!-- Core Stylesheet -->
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
@@ -43,7 +47,7 @@
   <a class="skip-link" href="#main">Skip to formal invitation</a>
 
   <!-- Audio Player Element (Autoplay & Ambient Soundtrack) -->
-  <audio id="wedding-audio" preload="auto" loop src="assets/audio/chizube-theme.mp3"></audio>
+  <audio id="wedding-audio" preload="metadata" loop src="assets/audio/chizube-theme.mp3"></audio>
 
   <!-- Sticky Header Navigation -->
   <header class="site-header" id="top">
@@ -143,7 +147,7 @@
     <!-- 1. HERO SECTION -->
     <section class="hero" id="hero" aria-label="Chi Chi &amp; Zubby Wedding Invitation">
       <div class="hero-backdrop">
-        <img src="/assets/aistudio/chizube1_1328dfb0.png" alt="Chi Chi &amp; Zubby in royal blue traditional attire" fetchpriority="high">
+        <img src="/assets/aistudio/chizube1_1328dfb0.png" srcset="/assets/aistudio/chizube1_1328dfb0.webp" alt="Chi Chi &amp; Zubby in royal blue traditional attire" fetchpriority="high" decoding="async">
       </div>
       <div class="hero-overlay"></div>
 
@@ -258,10 +262,10 @@
           
           <div class="story-media-stack reveal-up">
             <div class="story-portrait-frame">
-              <img class="story-portrait-main" src="/assets/aistudio/Elegant_Nigerian_Couple_in_Pink_Traditional_Attire_4ae9de39.png" alt="Chi Chi and Zubby in pink traditional attire" loading="lazy">
+              <img class="story-portrait-main" src="/assets/aistudio/Elegant_Nigerian_Couple_in_Pink_Traditional_Attire_4ae9de39.png" srcset="/assets/aistudio/Elegant_Nigerian_Couple_in_Pink_Traditional_Attire_4ae9de39.webp" alt="Chi Chi and Zubby in pink traditional attire" loading="lazy" decoding="async">
             </div>
             <div class="story-inset-frame">
-              <img class="story-portrait-inset" src="assets/images/hands.jpg" alt="Chi Chi and Zubby hands united" loading="lazy">
+              <img class="story-portrait-inset" src="assets/images/hands.jpg" alt="Chi Chi and Zubby hands united" loading="lazy" decoding="async">
             </div>
           </div>
 
@@ -320,7 +324,7 @@
           <!-- Ceremony Card -->
           <div class="venue-card reveal-up">
             <div class="venue-image-wrap">
-              <img src="assets/images/church-outside.jpg" alt="Sacred Heart Catholic Church Exterior" loading="lazy">
+              <img src="assets/images/church-outside.jpg" alt="Sacred Heart Catholic Church Exterior" loading="lazy" decoding="async">
               <span class="venue-type-tag">Solemn Nuptial Mass</span>
             </div>
             <div class="venue-body">
@@ -346,7 +350,7 @@
           <!-- Reception Card -->
           <div class="venue-card reveal-up">
             <div class="venue-image-wrap">
-              <img src="/assets/aistudio/dbf21b81-fa0b-4d01-9272-2cb674713897_460850a7.png" alt="Chizube 2026 Reception and Gala Banquet Hall" loading="lazy">
+              <img src="/assets/aistudio/dbf21b81-fa0b-4d01-9272-2cb674713897_460850a7.png" srcset="/assets/aistudio/dbf21b81-fa0b-4d01-9272-2cb674713897_460850a7.webp" alt="Chizube 2026 Reception and Gala Banquet Hall" loading="lazy" decoding="async">
               <span class="venue-type-tag" style="background: rgba(107, 23, 49, 0.9);">Reception &amp; Gala</span>
             </div>
             <div class="venue-body">
@@ -406,28 +410,28 @@
           
           <div class="gallery-track">
             <div class="gallery-slide active" data-caption="Chi Chi &amp; Zubby — Royal Blue Traditional Elegance">
-              <img src="/assets/aistudio/chizube1_1328dfb0.png" alt="Chi Chi and Zubby in royal blue traditional attire" loading="lazy">
+              <img src="/assets/aistudio/chizube1_1328dfb0.png" srcset="/assets/aistudio/chizube1_1328dfb0.webp" alt="Chi Chi and Zubby in royal blue traditional attire" loading="lazy" decoding="async">
             </div>
             <div class="gallery-slide" data-caption="Chi Chi &amp; Zubby — Radiant in Pink Traditional Attire">
-              <img src="/assets/aistudio/Elegant_Nigerian_Couple_in_Pink_Traditional_Attire_4ae9de39.png" alt="Chi Chi and Zubby in pink traditional attire" loading="lazy">
+              <img src="/assets/aistudio/Elegant_Nigerian_Couple_in_Pink_Traditional_Attire_4ae9de39.png" srcset="/assets/aistudio/Elegant_Nigerian_Couple_in_Pink_Traditional_Attire_4ae9de39.webp" alt="Chi Chi and Zubby in pink traditional attire" loading="lazy" decoding="async">
             </div>
             <div class="gallery-slide" data-caption="Chi Chi &amp; Zubby — Forever in Love">
-              <img src="assets/images/gallery/gallery-01.jpg" alt="Chi Chi and Zubby studio portrait" loading="lazy">
+              <img src="assets/images/gallery/gallery-01.jpg" alt="Chi Chi and Zubby studio portrait" loading="lazy" decoding="async">
             </div>
             <div class="gallery-slide" data-caption="Joyful Moments and Laughter">
-              <img src="assets/images/gallery/gallery-02.jpg" alt="Chi Chi and Zubby together smiling" loading="lazy">
+              <img src="assets/images/gallery/gallery-02.jpg" alt="Chi Chi and Zubby together smiling" loading="lazy" decoding="async">
             </div>
             <div class="gallery-slide" data-caption="Hand in Hand — Two Hearts United">
-              <img src="assets/images/gallery/gallery-03.jpg" alt="Couple holding hands" loading="lazy">
+              <img src="assets/images/gallery/gallery-03.jpg" alt="Couple holding hands" loading="lazy" decoding="async">
             </div>
             <div class="gallery-slide" data-caption="Aerial View of Sacred Heart Catholic Church">
-              <img src="assets/images/gallery/gallery-04.jpg" alt="Aerial drone view of Sacred Heart Catholic Church" loading="lazy">
+              <img src="assets/images/gallery/gallery-04.jpg" alt="Aerial drone view of Sacred Heart Catholic Church" loading="lazy" decoding="async">
             </div>
             <div class="gallery-slide" data-caption="Sanctuary of Sacred Heart Catholic Church">
-              <img src="assets/images/gallery/gallery-05.jpg" alt="Inside Sacred Heart Catholic Church altar" loading="lazy">
+              <img src="assets/images/gallery/gallery-05.jpg" alt="Inside Sacred Heart Catholic Church altar" loading="lazy" decoding="async">
             </div>
             <div class="gallery-slide" data-caption="The Cathedral Grounds at Ojo Cantonment">
-              <img src="assets/images/gallery/gallery-06.jpg" alt="Exterior of Sacred Heart Catholic Church" loading="lazy">
+              <img src="assets/images/gallery/gallery-06.jpg" alt="Exterior of Sacred Heart Catholic Church" loading="lazy" decoding="async">
             </div>
           </div>
 
@@ -452,28 +456,28 @@
         <!-- Thumbnails Rail -->
         <div class="gallery-thumbs-rail reveal-up">
           <button type="button" class="gallery-thumb-item active" aria-label="Photo 1">
-            <img src="/assets/aistudio/chizube1_1328dfb0.png" alt="Thumbnail 1">
+            <img src="/assets/aistudio/chizube1_1328dfb0.png" srcset="/assets/aistudio/chizube1_thumb.webp" alt="Thumbnail 1" loading="lazy" decoding="async">
           </button>
           <button type="button" class="gallery-thumb-item" aria-label="Photo 2">
-            <img src="/assets/aistudio/Elegant_Nigerian_Couple_in_Pink_Traditional_Attire_4ae9de39.png" alt="Thumbnail 2">
+            <img src="/assets/aistudio/Elegant_Nigerian_Couple_in_Pink_Traditional_Attire_4ae9de39.png" srcset="/assets/aistudio/pink_couple_thumb.webp" alt="Thumbnail 2" loading="lazy" decoding="async">
           </button>
           <button type="button" class="gallery-thumb-item" aria-label="Photo 3">
-            <img src="assets/images/gallery/gallery-01.jpg" alt="Thumbnail 3">
+            <img src="assets/images/gallery/gallery-01.jpg" alt="Thumbnail 3" loading="lazy" decoding="async">
           </button>
           <button type="button" class="gallery-thumb-item" aria-label="Photo 4">
-            <img src="assets/images/gallery/gallery-02.jpg" alt="Thumbnail 4">
+            <img src="assets/images/gallery/gallery-02.jpg" alt="Thumbnail 4" loading="lazy" decoding="async">
           </button>
           <button type="button" class="gallery-thumb-item" aria-label="Photo 5">
-            <img src="assets/images/gallery/gallery-03.jpg" alt="Thumbnail 5">
+            <img src="assets/images/gallery/gallery-03.jpg" alt="Thumbnail 5" loading="lazy" decoding="async">
           </button>
           <button type="button" class="gallery-thumb-item" aria-label="Photo 6">
-            <img src="assets/images/gallery/gallery-04.jpg" alt="Thumbnail 6">
+            <img src="assets/images/gallery/gallery-04.jpg" alt="Thumbnail 6" loading="lazy" decoding="async">
           </button>
           <button type="button" class="gallery-thumb-item" aria-label="Photo 7">
-            <img src="assets/images/gallery/gallery-05.jpg" alt="Thumbnail 7">
+            <img src="assets/images/gallery/gallery-05.jpg" alt="Thumbnail 7" loading="lazy" decoding="async">
           </button>
           <button type="button" class="gallery-thumb-item" aria-label="Photo 8">
-            <img src="assets/images/gallery/gallery-06.jpg" alt="Thumbnail 8">
+            <img src="assets/images/gallery/gallery-06.jpg" alt="Thumbnail 8" loading="lazy" decoding="async">
           </button>
         </div>
 
