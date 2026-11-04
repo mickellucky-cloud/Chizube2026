@@ -1643,7 +1643,9 @@ button {
 }
 
 .gallery-slide:nth-child(1) img,
-.gallery-slide:nth-child(2) img {
+.gallery-slide:nth-child(2) img,
+.gallery-slide:nth-child(3) img,
+.gallery-slide:nth-child(4) img {
   object-position: center 20%;
   transform-origin: center 25%;
 }

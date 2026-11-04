@@ -1,4 +1,6 @@
 import QRCode from 'qrcode';
+import { WEDDING_CONFIG } from './wedding-config.js';
+import { calculateCountdownParts, buildIcsContent, buildWhatsAppRsvpUrl } from './wedding-utils.js';
 
 /**
  * CHIZUBE 2026 - Wedding Invitation Engine
@@ -6,7 +8,7 @@ import QRCode from 'qrcode';
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  const cfg = window.WEDDING_CONFIG || {};
+  const cfg = WEDDING_CONFIG || window.WEDDING_CONFIG || {};
 
   // DOM Elements
   const header = document.querySelector('.site-header');
@@ -179,18 +181,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const elSeconds = document.querySelector('[data-seconds]');
 
   function updateCountdown() {
-    const now = Date.now();
-    const diff = Math.max(0, targetDate - now);
-
-    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const s = Math.floor((diff % (1000 * 60)) / 1000);
-
-    if (elDays) elDays.textContent = String(d).padStart(3, '0');
-    if (elHours) elHours.textContent = String(h).padStart(2, '0');
-    if (elMinutes) elMinutes.textContent = String(m).padStart(2, '0');
-    if (elSeconds) elSeconds.textContent = String(s).padStart(2, '0');
+    const parts = calculateCountdownParts(targetDate, Date.now());
+    if (elDays) elDays.textContent = parts.days;
+    if (elHours) elHours.textContent = parts.hours;
+    if (elMinutes) elMinutes.textContent = parts.minutes;
+    if (elSeconds) elSeconds.textContent = parts.seconds;
   }
 
   updateCountdown();
@@ -200,26 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const calendarBtn = document.querySelector('[data-calendar-btn]');
   if (calendarBtn) {
     calendarBtn.addEventListener('click', () => {
-      const title = cfg.event?.icsDetails?.title || 'Chizube 2026: Chi Chi & Zubby Wedding';
-      const desc = cfg.event?.icsDetails?.description || 'Holy Matrimony of Chi Chi & Zubby';
-      const loc = cfg.event?.icsDetails?.location || 'Sacred Heart Catholic Church, Ojo Military Cantonment, Lagos';
-      const start = '20261228T080000Z'; // 9:00 AM WAT = 08:00 AM UTC
-      const end = '20261228T180000Z';
-
-      const icsData = [
-        'BEGIN:VCALENDAR',
-        'VERSION:2.0',
-        'PRODID:-//Chizube 2026//Wedding Invitation//EN',
-        'BEGIN:VEVENT',
-        `SUMMARY:${title}`,
-        `DESCRIPTION:${desc}`,
-        `LOCATION:${loc}`,
-        `DTSTART:${start}`,
-        `DTEND:${end}`,
-        'STATUS:CONFIRMED',
-        'END:VEVENT',
-        'END:VCALENDAR'
-      ].join('\r\n');
+      const icsData = buildIcsContent(cfg.event?.icsDetails);
 
       const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
       const link = document.createElement('a');
@@ -575,17 +551,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (whatsappSubmitBtn) {
     whatsappSubmitBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      const data = getRsvpData();
-      const name = data?.name || 'A Guest';
-      const status = data?.attendance === 'Declining' ? 'Regretfully Declining' : 'Joyfully Attending';
-      const guests = data?.guestCount || '1';
-      const phone = data?.phone ? `\n📞 Phone: ${data.phone}` : '';
-      const notes = data?.notes ? `\n💌 Prayer/Note: "${data.notes}"` : '';
-
+      const data = getRsvpData() || {};
       const targetPhone = cfg.rsvp?.whatsappNumber || '2348130255015';
-      const message = `Hello Chi Chi & Zubby! I am confirming my RSVP for Chizube 2026.\n\n👤 Name: ${name}\n✨ Status: ${status}\n👥 Reserved Seats: ${guests} Person(s)${phone}${notes}\n\nCongratulations and God bless your union!`;
-
-      const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`;
+      const whatsappUrl = buildWhatsAppRsvpUrl(data, targetPhone);
       const link = document.createElement('a');
       link.href = whatsappUrl;
       link.target = '_blank';

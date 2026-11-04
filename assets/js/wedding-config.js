@@ -3,7 +3,7 @@
  * Single Source of Truth for Chi Chi & Zubby's Wedding Website
  */
 
-window.WEDDING_CONFIG = {
+export const WEDDING_CONFIG = {
   // Couple & Branding
   couple: {
     bride: "Chi Chi",
@@ -62,7 +62,7 @@ window.WEDDING_CONFIG = {
       type: "Dinner, Dancing & Celebration",
       time: "Following the Ceremony",
       address: "Ojo Military Cantonment Banquet Arena, Lagos, Nigeria",
-      image: "assets/images/portrait.jpg",
+      image: "/assets/aistudio/dbf21b81-fa0b-4d01-9272-2cb674713897_460850a7.png",
       note: "Reception, dinner, dancing, and celebration to follow immediately after holy mass.",
       googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Ojo+Military+Cantonment+Lagos"
     }
@@ -97,6 +97,8 @@ window.WEDDING_CONFIG = {
 
   // Gallery Photos
   gallery: [
+    { src: "/assets/aistudio/chizube1_1328dfb0.png", caption: "Chi Chi & Zubby — Royal Blue Traditional Elegance" },
+    { src: "/assets/aistudio/Elegant_Nigerian_Couple_in_Pink_Traditional_Attire_4ae9de39.png", caption: "Chi Chi & Zubby — Radiant in Pink Traditional Attire" },
     { src: "assets/images/gallery/gallery-01.jpg", caption: "Chi Chi & Zubby — Forever in Love" },
     { src: "assets/images/gallery/gallery-02.jpg", caption: "Joyful Moments and Laughter" },
     { src: "assets/images/gallery/gallery-03.jpg", caption: "Hand in Hand — Two Hearts United" },
@@ -120,3 +122,8 @@ window.WEDDING_CONFIG = {
     title: "Chizube 2026 Wedding Theme"
   }
 };
+
+if (typeof window !== 'undefined') {
+  window.WEDDING_CONFIG = WEDDING_CONFIG;
+}
+

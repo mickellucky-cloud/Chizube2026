@@ -1,5 +1,8 @@
 import { defineConfig } from 'vite';
 
+// Prevent Vite from exiting when stdin closes in non-interactive daemon/pre-warming environments
+process.env.CI = 'true';
+
 export default defineConfig({
   server: {
     host: '0.0.0.0',
@@ -14,3 +17,4 @@ export default defineConfig({
     allowedHosts: true,
   },
 });
+
