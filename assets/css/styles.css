@@ -1016,9 +1016,53 @@ button {
 }
 
 .invitation-cross {
-  font-size: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0 auto 1.35rem;
   color: var(--color-gold);
-  margin-bottom: 1rem;
+}
+
+.invitation-cross-svg {
+  width: 42px;
+  height: 54px;
+  display: block;
+  flex-shrink: 0;
+  filter: drop-shadow(0 3px 8px rgba(166, 128, 16, 0.22));
+}
+
+.invitation-cross-flourish {
+  display: block;
+  width: 56px;
+  height: 1px;
+  position: relative;
+}
+
+.invitation-cross-flourish.left {
+  background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.75) 100%);
+}
+
+.invitation-cross-flourish.right {
+  background: linear-gradient(270deg, transparent 0%, rgba(212, 175, 55, 0.75) 100%);
+}
+
+.invitation-cross-flourish::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  background: var(--color-gold);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.invitation-cross-flourish.left::after {
+  right: -2px;
+}
+
+.invitation-cross-flourish.right::after {
+  left: -2px;
 }
 
 .invitation-kicker {
@@ -1234,8 +1278,8 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 22%;
-  transform-origin: center center;
+  object-position: center 12%;
+  transform-origin: center 15%;
   will-change: transform;
   animation: kenBurnsPortraitMain 20s ease-in-out infinite alternate;
 }
@@ -1258,6 +1302,7 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
   transform-origin: center center;
   will-change: transform;
   animation: kenBurnsPortraitInset 18s ease-in-out infinite alternate-reverse;
@@ -1265,10 +1310,10 @@ button {
 
 @keyframes kenBurnsPortraitMain {
   0% {
-    transform: scale(1.01) translate3d(0%, 0%, 0);
+    transform: scale(1.0) translate3d(0%, 0%, 0);
   }
   100% {
-    transform: scale(1.09) translate3d(-1.5%, -1.2%, 0);
+    transform: scale(1.05) translate3d(-1%, 0.5%, 0);
   }
 }
 

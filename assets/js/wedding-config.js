@@ -98,10 +98,10 @@ export const WEDDING_CONFIG = {
   // Gallery Photos
   gallery: [
     { src: "/assets/aistudio/chizube1_1328dfb0.png", caption: "Chi Chi & Zubby — Royal Blue Traditional Elegance" },
-    { src: "/assets/aistudio/Elegant_Nigerian_Couple_in_Pink_Traditional_Attire_4ae9de39.png", caption: "Chi Chi & Zubby — Radiant in Pink Traditional Attire" },
+    { src: "/assets/aistudio/bca1a3da-2e9e-4cdc-8452-c9fbe64aa62f_fb5c874d.jpeg", caption: "Chi Chi & Zubby — Radiant in Pink Traditional Attire" },
     { src: "assets/images/gallery/gallery-01.jpg", caption: "Chi Chi & Zubby — Forever in Love" },
     { src: "assets/images/gallery/gallery-02.jpg", caption: "Joyful Moments and Laughter" },
-    { src: "assets/images/gallery/gallery-03.jpg", caption: "Hand in Hand — Two Hearts United" },
+    { src: "/assets/aistudio/9c59192d-fd22-448a-8090-8d10534d9ab6_33fb9a12.jpeg", caption: "Hand in Hand — Two Hearts United" },
     { src: "assets/images/gallery/gallery-04.jpg", caption: "Aerial View of Sacred Heart Catholic Church" },
     { src: "assets/images/gallery/gallery-05.jpg", caption: "Sanctuary of Sacred Heart Catholic Church" },
     { src: "assets/images/gallery/gallery-06.jpg", caption: "The Cathedral Grounds at Ojo Cantonment" }
