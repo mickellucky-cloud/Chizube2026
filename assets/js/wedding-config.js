@@ -99,7 +99,6 @@ export const WEDDING_CONFIG = {
   gallery: [
     { src: "/assets/aistudio/chizube1_1328dfb0.png", caption: "Chi Chi & Zubby — Royal Blue Traditional Elegance" },
     { src: "/assets/aistudio/bca1a3da-2e9e-4cdc-8452-c9fbe64aa62f_fb5c874d.jpeg", caption: "Chi Chi & Zubby — Radiant in Pink Traditional Attire" },
-    { src: "assets/images/gallery/gallery-01.jpg", caption: "Chi Chi & Zubby — Forever in Love" },
     { src: "assets/images/gallery/gallery-02.jpg", caption: "Joyful Moments and Laughter" },
     { src: "/assets/aistudio/9c59192d-fd22-448a-8090-8d10534d9ab6_33fb9a12.jpeg", caption: "Hand in Hand — Two Hearts United" },
     { src: "assets/images/gallery/gallery-04.jpg", caption: "Aerial View of Sacred Heart Catholic Church" },
